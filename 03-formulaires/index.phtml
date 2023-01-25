@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section>
+        <!-- V1 -->
+        <?php
+        if ($message != null) {
+            echo '<p>' . $message . '</p>';
+        }
+        ?>
+
+        <!-- V2 -->
+        <?php if ($message != null) { ?>
+            <p><?php echo $message; ?></p>
+        <?php } ?>
+
+        <!-- V3 -->
+        <?php if ($message != null) : ?>
+            <p><?= $message; ?></p>
+        <?php endif ?>
+
+
+    </section>
+
+    <form action="index.php" method="POST">
+        <div>
+            <label for="firstname">Prénom</label>
+            <input type="text" name="firstname" id="firstname">
+        </div>
+        <div>
+            <label for="birthdate">Date de naissance</label>
+            <input type="date" name="birthdate" id="birthdate">
+        </div>
+        <div>
+            <label for="language">Ton langage préféré</label>
+            <select name="language" id="language">
+                <?php foreach ($languages as $language) : ?>
+                    <option value="<?= $language; ?>"><?= $language; ?></option>
+                <?php endforeach; ?>
+
+                <?php
+                foreach ($languages as $language) {
+                    echo '<option value="' . $language . '">' . $language . '</option>';
+                }
+                ?>
+            </select>
+        </div>
+        <input type="submit" value="Soumettre">
+    </form>
+</body>
+
+</html>
