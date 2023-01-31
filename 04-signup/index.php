@@ -22,11 +22,31 @@ if (!empty($_POST)){
     $birthdate = $_POST["birthdate"];
     $email = trim($_POST["email"]);
     $password = $_POST["password"];
+    $passwordConfirm = $_POST["password-confirm"];
     // $newsletter = $_POST["newsletter"] ?? 0;
     $newsletter = isset($_POST["newsletter"]) ? $_POST["newsletter"] : 0;
 
     // 2. Validation des données : on initialise un tableau, on stockera les messages d'erreur dedans
     $errors = [];
+
+    // Récupération des données du fichier JSON
+
+    // On initialise la variable $customers à un tableau vide
+    $customers = [];
+
+    // Si le fichier existe... 
+    if(file_exists(FILENAME)) {
+
+        // ... on récupère son contenu
+        $jsonData = file_get_contents(FILENAME);
+
+        // Si il y a bien des données dans le fichier JSON...
+        if($jsonData) {
+
+            // ... on les récupère !
+            $customers = json_decode($jsonData, true);
+        }
+    }
 
     // Si le champ "firstname" n'est pas rempli...
     if(!$firstname) {
@@ -41,14 +61,26 @@ if (!empty($_POST)){
         $errors['birthdate'] = 'Veuillez remplir le champ "Date de naissance"';
     }
 
+    // Validation de l'email
     if(!$email) {
         $errors['email'] = 'Veuillez remplir le champ "Email"';
     } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $errors['email'] = 'Veuillez remplir un email valide';
+    } else {
+        
+        // On vérifie l'existance de l'email seulement si celui-ci est rempli et valide
+        foreach ($customers as $customer) {
+            if($customer['email'] == $email) {
+                $errors['email'] = 'Un compte existe déjà avec cet email';
+                break;
+            }
+        }
     }
 
     if(strlen($password) < 8) {
         $errors['password'] = 'Le mot de passe doit comporter au moins 8 caractères';
+    } elseif ($password != $passwordConfirm) {
+        $errors['password-confirm'] = 'La confirmation ne correspond pas';
     }
 
     // Si il n'y a pas d'erreur... 
@@ -63,24 +95,6 @@ if (!empty($_POST)){
             "password" => $password,
             "newsletter" => $newsletter
         ];
-
-        // On initialise la variable $customers à un tableau vide
-        $customers = [];
-
-        // Si le fichier existe... 
-        if(file_exists(FILENAME)) {
-
-            // ... on récupère son contenu
-            $jsonData = file_get_contents(FILENAME);
-
-            // Si il y a bien des données dans le fichier JSON...
-            if($jsonData) {
-
-                // ... on les récupère !
-                $customers = json_decode($jsonData, true);
-            }
-
-        }
 
         // On ajoute le nouveau client au tableau de clients
         array_push($customers, $newCustomer);
