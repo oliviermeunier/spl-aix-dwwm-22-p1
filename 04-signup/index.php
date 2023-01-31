@@ -1,6 +1,9 @@
 <?php 
 
 
+// Inclusion des dépendances
+require 'functions.php';
+
 ///////////////////////////////////////
 //            TRAITEMENTS            //
 ///////////////////////////////////////
@@ -66,15 +69,8 @@ if (!empty($_POST)){
         $errors['email'] = 'Veuillez remplir le champ "Email"';
     } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $errors['email'] = 'Veuillez remplir un email valide';
-    } else {
-        
-        // On vérifie l'existance de l'email seulement si celui-ci est rempli et valide
-        foreach ($customers as $customer) {
-            if($customer['email'] == $email) {
-                $errors['email'] = 'Un compte existe déjà avec cet email';
-                break;
-            }
-        }
+    } elseif(emailExists($email, $customers)) {
+        $errors['email'] = 'Un compte existe déjà avec cet email';
     }
 
     if(strlen($password) < 8) {
