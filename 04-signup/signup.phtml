@@ -1,0 +1,51 @@
+<h1>Création de compte client</h1>
+
+  <form action="signup.php" method="post">
+    <div>
+      <label for="lastname">Nom :</label>
+      <input type="text" id="lastname" name="lastname" value="<?=$lastname;?>">
+      <?php if(isset($errors['lastname'])):?>
+        <p class="error"><?=$errors['lastname'];?></p>
+      <?php endif; ?>
+    </div>
+    <div>
+      <label for="firstname">Prénom :</label>
+      <input type="text" id="firstname" name="firstname" value="<?=$firstname;?>">
+      <?php if(isset($errors['firstname'])):?>
+        <p class="error"><?=$errors['firstname'];?></p>
+      <?php endif; ?>
+    </div>
+    <div>
+      <label for="birthdate">Date de naissance :</label>
+      <input type="date" id="birthdate" name="birthdate" value="<?=$birthdate;?>">
+      <?php if(isset($errors['birthdate'])):?>
+        <p class="error"><?=$errors['birthdate'];?></p>
+      <?php endif; ?>
+    </div>
+    <div>
+      <label for="email">Email :</label>
+      <input type="text" id="email" name="email" value="<?=$email;?>">
+      <?php if(isset($errors['email'])):?>
+        <p class="error"><?=$errors['email'];?></p>
+      <?php endif; ?>
+    </div>
+    <div>
+      <label for="password">Mot de passe :</label>
+      <input type="password" id="password" name="password">
+      <?php if(isset($errors['password'])):?>
+        <p class="error"><?=$errors['password'];?></p>
+      <?php endif; ?>
+    </div>
+    <div>
+      <label for="password-confirm">Confirmation :</label>
+      <input type="password" id="password-confirm" name="password-confirm">
+      <?php if(isset($errors['password-confirm'])):?>
+        <p class="error"><?=$errors['password-confirm'];?></p>
+      <?php endif; ?>
+    </div>
+    <div>
+      <label for="newsletter">S'abonner à la newsletter :</label>
+      <input type="checkbox" id="newsletter" name="newsletter" value="1" <?=$newsletter ? 'checked' : '';?>>
+    </div>
+    <input type="submit" value="Créer compte">
+  </form>
