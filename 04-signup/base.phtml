@@ -10,11 +10,17 @@
     <header>
         <nav>
             <a href="index.php">Accueil</a>
-            <a href="signup.php">Créer un compte</a>
-            <a href="login.php">Connexion</a>
+            <?php if (!isConnected()): ?>
+                <a href="signup.php">Créer un compte</a>
+                <a href="login.php">Connexion</a>
+            <?php else: ?>
+                <a href="profile.php">Mon profil</a>
+                <a href="logout.php">Déconnexion</a>
+            <?php endif; ?>
         </nav>
     </header>
     <main>
+        <!-- inclusion du fichier de template -->
         <?php include $template . '.phtml'; ?>
     </main>
 </body>

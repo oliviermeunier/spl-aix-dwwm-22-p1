@@ -2,6 +2,16 @@
 
 const FILENAME = 'customers.json';
 
+
+function isConnected(): bool
+{
+    /**
+     * @TODO Vérifier que la session à démarré
+     */
+    return array_key_exists('user', $_SESSION) && $_SESSION['user'];
+}
+
+
 /**
  * Vérifie des identifiants de connexion
  */
@@ -18,7 +28,7 @@ function checkCredentials(string $email, string $password)
     // Sinon (si le client existe)
 
     // 2. Est-ce que le mot de passe est correct ?
-    if ($password != $customer['password']) {
+    if (!password_verify($password, $customer['password'])) {
         return false;
     }
 

@@ -3,6 +3,8 @@
 // Démarrage de la session
 session_start();
 
+// Inclusion des dépendances
+require 'functions.php';
 
 $flashMessage = null;
 

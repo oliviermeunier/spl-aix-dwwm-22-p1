@@ -43,13 +43,15 @@ if (!empty($_POST)){
     // Si il n'y a pas d'erreur... 
     if(empty($errors)) {
 
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
         // Ajout du nouvel utilisateur dans le fichier JSON
         addCustomer(
             $lastname, 
             $firstname,
             $email,
             $birthdate, 
-            $password,
+            $hash,
             $newsletter
         );
 
