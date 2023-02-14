@@ -10,6 +10,11 @@
 
 <h1>Création de compte client</h1>
 
+<!-- Message flash le cas échéant -->
+<?php if ($flashMessage != null) : ?>
+  <p><?=$flashMessage;?></p>
+<?php endif; ?>
+
   <form action="index.php" method="post">
     <div>
       <label for="lastname">Nom :</label>

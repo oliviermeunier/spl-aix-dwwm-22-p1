@@ -1,5 +1,8 @@
 <?php 
 
+// Démarrage de la session
+// Att. : démarrer la session AVANT tout envoi de données au client
+session_start();
 
 // Inclusion des dépendances
 require 'functions.php';
@@ -52,6 +55,9 @@ if (!empty($_POST)){
             $newsletter
         );
 
+        // Ajout d'un message flash en session
+        $_SESSION['flash'] = 'Votre compte a été créé avec succès.';
+
         // Redirection vers l'index.php mais sans les données du formulaire
         // Design pattern : POST redirect GET (cf https://fr.wikipedia.org/wiki/Post-redirect-get)
         header('Location: index.php');
@@ -62,6 +68,20 @@ if (!empty($_POST)){
 ///////////////////////////////////////
 //             AFFICHAGE             //
 ///////////////////////////////////////
+
+$flashMessage = null;
+
+// Récupération du message flash
+if (array_key_exists('flash', $_SESSION) && $_SESSION['flash']) {
+    
+    // On récupère le message flash dans une variable 
+    $flashMessage = $_SESSION['flash'];
+
+    // On l'efface de la session
+    $_SESSION['flash'] = null;
+}
+
+
 include 'index.phtml';
 
 
