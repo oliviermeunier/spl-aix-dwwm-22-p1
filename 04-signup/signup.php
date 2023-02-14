@@ -11,8 +11,6 @@ require 'functions.php';
 //            TRAITEMENTS            //
 ///////////////////////////////////////
 
-const FILENAME = 'customers.json';
-
 $lastname = '';
 $firstname = '';
 $birthdate = '';

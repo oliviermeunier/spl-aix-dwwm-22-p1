@@ -1,5 +1,51 @@
 <?php 
 
+const FILENAME = 'customers.json';
+
+/**
+ * Vérifie des identifiants de connexion
+ */
+function checkCredentials(string $email, string $password)
+{
+    // 1. Est-ce que l'utilisateur (email) existe ?
+    $customer = getCustomerByEmail($email);
+    
+    // Si le client n'existe pas...
+    if ($customer == null) {
+        return false;
+    } 
+
+    // Sinon (si le client existe)
+
+    // 2. Est-ce que le mot de passe est correct ?
+    if ($password != $customer['password']) {
+        return false;
+    }
+
+    // Ici tout est OK ! 
+    return $customer;    
+}
+
+
+/**
+ * Récupère un client à partir de son email
+ */
+function getCustomerByEmail(string $email): ?array
+{
+    // On récupère le tableau de customers
+    $customers = getDataFromJSON(FILENAME);
+
+    // On vérifie l'existance de l'email seulement si celui-ci est rempli et valide
+    foreach ($customers as $customer) {
+        if($customer['email'] == $email) {
+            return $customer;
+        }
+    }
+
+    // Ici je sais que je n'ai pas trouvé le client
+    return null;
+}
+
 /**
  * Vérifie si l'email existe dans le fichier de customers
  */
