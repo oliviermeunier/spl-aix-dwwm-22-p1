@@ -1,6 +1,6 @@
 <?php
 
-class Rectangle {
+class Rectangle extends Shape {
 
     // Ici je suis à l'intérieur de la classe
 
@@ -14,12 +14,9 @@ class Rectangle {
      *      public : accessible partout
      *      private : accessible uniquement à l'intérieur de la classe
      */
-    private int $x;
-    private int $y;
+    
     private int $width;
     private int $height;
-    private string $color;
-    private float $opacity;
 
     // 3. Méthodes (actions => fonctions)
 
@@ -30,53 +27,21 @@ class Rectangle {
      */
     public function __construct(
         int $x = 0, 
-        int $y = 0, 
+        int $y = 0,
         int $width = 10, 
-        int $height = 5, 
+        int $height = 5,
         string $color = 'grey', 
-        float $opacity = 1)
+        float $opacity = 1) 
     {
-        $this->x = $x;
-        $this->y = $y;
+        parent::__construct($x, $y, $color, $opacity);
         $this->width = $width;
         $this->height = $height;
-        $this->color = $color;
-        $this->opacity = $opacity;
-    }
-
-    /**
-     * Getters : récupèrent et retournent la valeur des propriétés
-     * Setters : prennent une valeur en paramètre et l'affecte à une propriété
-     */
-    // function getX(): int 
-    // {
-    //     return $this->x;
-    // }
-
-    // function setX(int $x)
-    // {   
-    //     $this->x = $x;
-    // }
-    public function setPosition(int $x, int $y)
-    {
-        $this->x = $x;
-        $this->y = $y;
-
-        return $this;
     }
 
     public function setSize(int $width, int $height)
     {
         $this->width = $width;
         $this->height = $height;
-
-        return $this;
-    }
-
-    public function setFill(string $color, float $opacity)
-    {
-        $this->color = $color;
-        $this->opacity = $opacity;
 
         return $this;
     }

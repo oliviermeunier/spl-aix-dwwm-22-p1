@@ -2,7 +2,10 @@
 
 
 // Inclusion des dépendances
+require 'class/Shape.php';
 require 'class/Rectangle.php';
+require 'class/Ellipse.php';
+require 'class/Square.php';
 
 
 // function genRectangle(int $x, int $y, int $width, int $height, string $color, float $opacity)
@@ -23,12 +26,18 @@ $rect3
     ->setSize(80, 120)
     ->setFill('orange', 1);
 
+$ellipse = new Ellipse();
+$ellipse
+    ->setPosition(500, 198)
+    ->setRadius(70,140)
+    ->setFill('lightblue', 0.7);
+
 // #2 AFFICHAGE : Rendu SVG
 $svg = '';
 $svg .= $rect1->draw(); // équivaut à : $svg = $svg . $rect1->draw();
 $svg .= $rect2->draw();
 $svg .= $rect3->draw();
-
+$svg .= $ellipse->draw();
 
 // Inclusion du template
 include 'index.phtml';
