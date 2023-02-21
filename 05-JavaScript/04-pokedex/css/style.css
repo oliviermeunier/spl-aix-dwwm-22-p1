@@ -1,0 +1,39 @@
+.hidden {
+  display: none;
+}
+
+main {
+  display: flex;
+}
+
+#results-container {
+  height: 400px;
+  overflow: auto;
+  border: 1px solid grey;
+  margin-top:5px;
+}
+
+#results-container p {
+  margin: 0;
+  height: 2rem;
+  line-height: 2rem;
+}
+
+#results-container p:nth-child(even) {
+  background-color:#CFFBFF;
+}
+
+#results-container p:nth-child(odd) {
+  background-color:#F6E0DF;
+}
+
+#results-container p:hover {
+  background-color:#CD5334;
+}
+
+#results-container a {
+  display: block;
+  padding-left: 15px;
+  text-decoration: none;
+  color: black;
+}
