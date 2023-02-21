@@ -6,7 +6,7 @@ require 'class/Shape.php';
 require 'class/Rectangle.php';
 require 'class/Ellipse.php';
 require 'class/Square.php';
-
+require 'class/Circle.php';
 
 // function genRectangle(int $x, int $y, int $width, int $height, string $color, float $opacity)
 // {
@@ -32,12 +32,19 @@ $ellipse
     ->setRadius(70,140)
     ->setFill('lightblue', 0.7);
 
+$circle = new Circle();
+$circle
+    ->setPosition(420, 150)
+    ->setRadius(60)
+    ->setFill('pink', 1);
+
 // #2 AFFICHAGE : Rendu SVG
 $svg = '';
 $svg .= $rect1->draw(); // équivaut à : $svg = $svg . $rect1->draw();
 $svg .= $rect2->draw();
 $svg .= $rect3->draw();
 $svg .= $ellipse->draw();
+$svg .= $circle->draw();
 
 // Inclusion du template
 include 'index.phtml';

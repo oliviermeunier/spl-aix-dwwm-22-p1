@@ -13,6 +13,7 @@ class Rectangle extends Shape {
      * Visibilité : 
      *      public : accessible partout
      *      private : accessible uniquement à l'intérieur de la classe
+     *      protected : accessible dans la classe et dans les classes enfants (qui en héritent)
      */
     
     private int $width;

@@ -27,6 +27,6 @@ class Circle extends Shape {
 
     function draw()
     {
-        return '<circle cx="'.$this->x.'" cy="'.$this->y.'" rx="'.$this->radius.'" ry="'.$this->radius.'" fill="'.$this->color.'" opacity="'.$this->opacity.'" />';
+        return '<circle cx="'.$this->x.'" cy="'.$this->y.'" r="'.$this->radius.'" fill="'.$this->color.'" opacity="'.$this->opacity.'" />';
     }
 }
