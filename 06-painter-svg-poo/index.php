@@ -15,6 +15,8 @@ require 'class/Circle.php';
 
 // #1 TRAITEMENTS : création des formes géométriques
 
+$shapes = [];
+
 // Création d'un objet de la classe Rectangle
 // Lors de la création d'un objet, c'est le constructeur qui est appelé automatiquement par PHP
 $rect1 = new Rectangle(100, 50, 200, 150, 'crimson', 1);
@@ -38,13 +40,21 @@ $circle
     ->setRadius(60)
     ->setFill('pink', 1);
 
+// Je stocke mes objets de forme dans un tableau
+$shapes[] = $rect1;
+$shapes[] = $rect2;
+$shapes[] = $rect3;
+$shapes[] = $ellipse;
+$shapes[] = $circle;
+
 // #2 AFFICHAGE : Rendu SVG
 $svg = '';
-$svg .= $rect1->draw(); // équivaut à : $svg = $svg . $rect1->draw();
-$svg .= $rect2->draw();
-$svg .= $rect3->draw();
-$svg .= $ellipse->draw();
-$svg .= $circle->draw();
+
+foreach ($shapes as $shape)
+{
+    $svg .= $shape->draw(); // $svg = $svg . $shape->draw();
+}
+
 
 // Inclusion du template
 include 'index.phtml';

@@ -1,11 +1,13 @@
 <?php
 
-class Shape {
+abstract class Shape {
 
     protected int $x;
     protected int $y;
     protected string $color;
     protected float $opacity;
+
+    abstract public function draw();
 
     public function __construct(
         int $x = 0, 
