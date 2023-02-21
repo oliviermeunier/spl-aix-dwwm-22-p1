@@ -31,7 +31,10 @@ class Ellipse extends Shape {
 
     function draw()
     {
-        return '<ellipse cx="'.$this->x.'" cy="'.$this->y.'" rx="'.$this->xRadius.'" ry="'.$this->yRadius.'" fill="'.$this->color.'" opacity="'.$this->opacity.'" />';
+        $x = $this->position->getX();
+        $y = $this->position->getY();
+
+        return '<ellipse cx="'.$x.'" cy="'.$y.'" rx="'.$this->xRadius.'" ry="'.$this->yRadius.'" fill="'.$this->color.'" opacity="'.$this->opacity.'" />';
     }
 }
 

@@ -27,6 +27,9 @@ class Square extends Shape {
 
     function draw()
     {
-        return '<rect x="'.$this->x.'" y="'.$this->y.'" width="'.$this->size.'" height="'.$this->size.'" fill="'.$this->color.'" opacity="'.$this->opacity.'" />';
+        $x = $this->position->getX();
+        $y = $this->position->getY();
+
+        return '<rect x="'.$x.'" y="'.$y.'" width="'.$this->size.'" height="'.$this->size.'" fill="'.$this->color.'" opacity="'.$this->opacity.'" />';
     }
 }

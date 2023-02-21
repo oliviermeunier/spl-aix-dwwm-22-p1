@@ -2,6 +2,7 @@
 
 
 // Inclusion des dépendances
+require 'class/Point.php';
 require 'class/Shape.php';
 require 'class/Rectangle.php';
 require 'class/Ellipse.php';

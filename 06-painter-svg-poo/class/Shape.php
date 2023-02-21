@@ -2,8 +2,7 @@
 
 abstract class Shape {
 
-    protected int $x;
-    protected int $y;
+    protected Point $position;
     protected string $color;
     protected float $opacity;
 
@@ -15,16 +14,14 @@ abstract class Shape {
         string $color = 'grey', 
         float $opacity = 1)
     {
-        $this->x = $x;
-        $this->y = $y;
+        $this->position = new Point($x, $y);
         $this->color = $color;
         $this->opacity = $opacity;
     }
 
     public function setPosition(int $x, int $y)
     {
-        $this->x = $x;
-        $this->y = $y;
+        $this->position->setXY($x, $y);
 
         return $this;
     }
