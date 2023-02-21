@@ -1,5 +1,8 @@
 <?php 
 
+// Inclure l'autoload de composer
+require 'vendor/autoload.php';
+
 
 // Inclusion des dépendances
 require 'class/Point.php';
@@ -47,6 +50,8 @@ $shapes[] = $rect2;
 $shapes[] = $rect3;
 $shapes[] = $ellipse;
 $shapes[] = $circle;
+
+// dd($shapes);
 
 // #2 AFFICHAGE : Rendu SVG
 $svg = '';
