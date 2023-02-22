@@ -3,14 +3,12 @@
 // Inclure l'autoload de composer
 require 'vendor/autoload.php';
 
+function autoload (string $classname) {
+    require 'class/' . $classname . '.php';
+}
 
-// Inclusion des dépendances
-require 'class/Point.php';
-require 'class/Shape.php';
-require 'class/Rectangle.php';
-require 'class/Ellipse.php';
-require 'class/Square.php';
-require 'class/Circle.php';
+// Autoloading
+spl_autoload_register('autoload');
 
 // function genRectangle(int $x, int $y, int $width, int $height, string $color, float $opacity)
 // {
@@ -43,7 +41,7 @@ $circle
     ->setPosition(420, 150)
     ->setRadius(60)
     ->setFill('pink', 1);
-
+  
 // Je stocke mes objets de forme dans un tableau
 $shapes[] = $rect1;
 $shapes[] = $rect2;
