@@ -1,0 +1,17 @@
+<!-- Dans ce template, je n'ai que le code HTML de la page d'accueil -->
+<section>
+    <h2>Les derniers articles</h2>
+    <?php foreach ($articles as $article): ?>
+        <article>
+            <h3><?=$article['title'];?></h3>
+            <small>Créé le <?=(new DateTimeImmutable($article['createdAt']))->format('d/m/Y');?></small>
+            <?php if ($article['image']): ?>
+                <img src="images/<?=$article['image']?>" alt="">
+            <?php endif; ?>
+            <p><?=mb_substr($article['content'], 0, 100)?> [...]</p>
+            <a href="#">Lire la suite</a>
+        </article>
+    <?php endforeach; ?>
+</section>
+
+
