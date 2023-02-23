@@ -1,17 +1,23 @@
 <!-- Dans ce template, je n'ai que le code HTML de la page d'accueil -->
 <section>
     <h2>Les derniers articles</h2>
-    <?php foreach ($articles as $article): ?>
-        <article>
-            <h3><?=$article['title'];?></h3>
-            <small>Créé le <?=(new DateTimeImmutable($article['createdAt']))->format('d/m/Y');?></small>
-            <?php if ($article['image']): ?>
-                <img src="images/<?=$article['image']?>" alt="">
-            <?php endif; ?>
-            <p><?=mb_substr($article['content'], 0, 100)?> [...]</p>
-            <a href="#">Lire la suite</a>
-        </article>
-    <?php endforeach; ?>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <?php foreach ($articles as $article): ?>
+            <div class="col mb-4">
+                <article class="card article-abstract">
+                    <div class="card-body">
+                        <?php if ($article['image']): ?>
+                            <img src="images/<?=$article['image']?>" alt="" class="card-img-top mb-2">
+                        <?php endif; ?>
+                        <h3 class="card-title"><?=$article['title'];?></h3>
+                        <small>Créé le <?=(new DateTimeImmutable($article['createdAt']))->format('d/m/Y');?></small>
+                        <p class="card-text"><?=mb_substr($article['content'], 0, 100)?> [...]</p>
+                        <a class="btn btn-primary stretched-link" href="#">Lire la suite</a>
+                    </div>
+                </article>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </section>
 
 

@@ -5,15 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon super blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <header>
+    <header class="container-md">
         <h1>Mon super Blog</h1>
         <nav>
             <a href="home.php">Accueil</a>
         </nav>
     </header>
-    <main>
+    <main class="container-md">
         <?php include $template . '.phtml'; ?>
     </main>
 </body>
