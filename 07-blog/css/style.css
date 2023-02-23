@@ -22,3 +22,9 @@ html, body {
 .article-category {
     background-color: #5C0029;
 }
+
+.article-details img {
+    height:300px;
+    object-fit: cover;
+    object-position: 50% 50%;
+}

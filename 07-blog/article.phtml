@@ -1,5 +1,5 @@
 <!-- Le code HTML du corps de la page Article --> 
-<article>
+<article class="article-details">
     <h2><?=$article['title'];?></h2>
     <p>Créé le <?=(new DateTimeImmutable($article['createdAt']))->format('d/m/Y');?></p>
     <div class="badge article-category mb-3"><?=$article['name']?></div>

@@ -29,6 +29,13 @@ if (!$article) {
     exit; // Fin de l'exécution du script PHP
 }
 
+
+// Traitement du formulaire d'ajout de commentaire
+
+
+// Sélection des commentaires associés à l'article
+
+
 // Affichage : inclure le template
 $template = 'article';
 include 'base.phtml';
