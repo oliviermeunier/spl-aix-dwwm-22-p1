@@ -41,3 +41,25 @@ function getAllArticles()
 
     return $query->fetchAll();
 } 
+
+/**
+ * Sélectionne un article à partir de son id
+ */
+function getOneArticle(int $idArticle)
+{
+    // Connexion à la BDD
+    $pdo = getPDOConnection();
+
+    $sql = 'SELECT * 
+            FROM article AS A
+            INNER JOIN category AS C 
+            ON A.categoryId = C.idCategory
+            WHERE idArticle = ?'; 
+
+    $query = $pdo->prepare($sql);
+    $query->execute([$idArticle]);
+
+    $result = $query->fetch();
+
+    return $result;
+}

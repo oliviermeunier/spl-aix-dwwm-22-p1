@@ -1,0 +1,10 @@
+<!-- Le code HTML du corps de la page Article --> 
+<article>
+    <h2><?=$article['title'];?></h2>
+    <p>Créé le <?=(new DateTimeImmutable($article['createdAt']))->format('d/m/Y');?></p>
+    <div class="badge article-category mb-3"><?=$article['name']?></div>
+    <?php if ($article['image']): ?>
+        <img src="images/<?=$article['image']?>" alt="" class="card-img-top mb-2">
+    <?php endif; ?>
+    <p class="card-text"><?=$article['content'];?></p>
+</article>

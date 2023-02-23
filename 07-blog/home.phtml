@@ -10,9 +10,10 @@
                             <img src="images/<?=$article['image']?>" alt="" class="card-img-top mb-2">
                         <?php endif; ?>
                         <h3 class="card-title"><?=$article['title'];?></h3>
-                        <small>Créé le <?=(new DateTimeImmutable($article['createdAt']))->format('d/m/Y');?></small>
+                        <div class="badge article-category"><?=$article['name']?></div>
+                        <p>Créé le <?=(new DateTimeImmutable($article['createdAt']))->format('d/m/Y');?></p>
                         <p class="card-text"><?=mb_substr($article['content'], 0, 100)?> [...]</p>
-                        <a class="btn btn-primary stretched-link" href="#">Lire la suite</a>
+                        <a class="btn btn-primary stretched-link" href="article.php?id=<?=$article['idArticle'];?>">Lire la suite</a>
                     </div>
                 </article>
             </div>
