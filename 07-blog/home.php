@@ -12,8 +12,6 @@ require 'functions.php';
 // Sélection des 3 derniers articles
 $articles = getAllArticles();
 
-// dump($articles);
-
 // Affichage : inclusion du template
 $template = 'home';
 include 'base.phtml';
