@@ -7,6 +7,7 @@ require 'vendor/autoload.php';
 require 'config.php';
 
 // Inclusion des dépendances
+require 'src/Core/Database.php';
 require 'functions.php';
 
 // Sélection des 3 derniers articles

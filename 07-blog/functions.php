@@ -1,33 +1,11 @@
 <?php 
 
 /**
- * Connexion à la base de données
- */
-function getPDOConnection() {
-
-    // Construction du Data Source Name
-    $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST . ';charset=utf8';
-
-    // Tableau d'options pour la connexion PDO
-    $options = [
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ];
-
-    // Création de la connexion PDO (création d'un objet PDO)
-    $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
-    $pdo->exec('SET NAMES UTF8');
-    
-    return $pdo;
-}
-
-/**
  * Sélectionne tous les articles
  */
 function getAllArticles()
 {
-    // Connexion à la BDD
-    $pdo = getPDOConnection();
+    $db = new Database();
 
     $sql = 'SELECT * 
             FROM article AS A
@@ -36,10 +14,7 @@ function getAllArticles()
             ORDER BY createdAt DESC 
             LIMIT 3';
 
-    $query = $pdo->prepare($sql);
-    $query->execute();
-
-    return $query->fetchAll();
+    return $db->getAllResults($sql);
 } 
 
 /**
@@ -47,8 +22,7 @@ function getAllArticles()
  */
 function getOneArticle(int $idArticle)
 {
-    // Connexion à la BDD
-    $pdo = getPDOConnection();
+    $db = new Database();
 
     $sql = 'SELECT * 
             FROM article AS A
@@ -56,40 +30,30 @@ function getOneArticle(int $idArticle)
             ON A.categoryId = C.idCategory
             WHERE idArticle = ?'; 
 
-    $query = $pdo->prepare($sql);
-    $query->execute([$idArticle]);
-
-    $result = $query->fetch();
-
-    return $result;
+    return $db->getOneResult($sql, [$idArticle]);
 }
 
 function addComment(string $nickname, string $content, int $idArticle)
 {
-    // Connexion à la BDD
-    $pdo = getPDOConnection();
+    $db = new Database();
 
-    $sql = 'INSERT INTO comment (nickname, content, articleId, createdAt)
+    $sql = 'INSERT INTO comment 
+            (nickname, content, articleId, createdAt)
             VALUES (?, ?, ?, NOW())'; 
 
-    $query = $pdo->prepare($sql);
-    $query->execute([$nickname, $content, $idArticle]);
+    $db->prepareAndExecute($sql, [$nickname, $content, $idArticle]);
 }
 
 function getCommentsByArticleId(int $idArticle)
 {
-    // Connexion à la BDD
-    $pdo = getPDOConnection();
+    $db = new Database();
 
     $sql = 'SELECT * 
             FROM comment 
             WHERE articleId = ?
             ORDER BY createdAt DESC';
 
-    $query = $pdo->prepare($sql);
-    $query->execute([$idArticle]);
-
-    return $query->fetchAll();
+    return $db->getAllResults($sql, [$idArticle]);
 }
 
 function validateCommentForm(string $nickname, string $content)
