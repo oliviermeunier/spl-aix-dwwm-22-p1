@@ -7,11 +7,13 @@ require 'vendor/autoload.php';
 require 'config.php';
 
 // Inclusion des dépendances
+require 'src/Model/ArticleModel.php';
 require 'src/Core/Database.php';
 require 'functions.php';
 
 // Sélection des 3 derniers articles
-$articles = getAllArticles();
+$articleModel = new ArticleModel();
+$articles = $articleModel->getAllArticles();
 
 // Affichage : inclusion du template
 $template = 'home';

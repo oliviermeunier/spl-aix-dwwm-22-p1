@@ -1,23 +1,6 @@
 <?php 
 
 /**
- * Sélectionne tous les articles
- */
-function getAllArticles()
-{
-    $db = new Database();
-
-    $sql = 'SELECT * 
-            FROM article AS A
-            INNER JOIN category AS C 
-            ON A.categoryId = C.idCategory 
-            ORDER BY createdAt DESC 
-            LIMIT 3';
-
-    return $db->getAllResults($sql);
-} 
-
-/**
  * Sélectionne un article à partir de son id
  */
 function getOneArticle(int $idArticle)
