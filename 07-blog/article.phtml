@@ -8,3 +8,39 @@
     <?php endif; ?>
     <p class="card-text"><?=$article['content'];?></p>
 </article>
+
+<section>
+    <h2>Commentaires</h2>
+    <form action="article.php?id=<?=$idArticle?>" method="POST">
+        <fieldset>
+            <legend>Ajouter un commentaire</legend>
+            <div>
+                <label for="nickname">Pseudo</label>
+                <input type="text" id="nickname" name="nickname">
+                <?php if (isset($errors['nickname'])): ?>
+                    <p class="error"><?=$errors['nickname']?></p>
+                <?php endif; ?>
+            </div>
+            <div>
+                <label for="content">Commentaire</label>
+                <textarea id="content" name="content"></textarea>
+                <?php if (isset($errors['content'])): ?>
+                    <p class="error"><?=$errors['content']?></p>
+                <?php endif; ?>
+            </div>
+            <input type="submit" value="Valider">
+        </fieldset>
+    </form>
+
+    <?php if(empty($comments)): ?>
+        <p>Soyez le premier à ajouter un commentaire !</p>
+    <?php else: ?>
+        <?php foreach ($comments as $comment): ?>
+            <div>
+                <h3>Ajouté par <?=$comment['nickname'];?> le <?=(new DateTimeImmutable($comment['createdAt']))->format('d/m/Y')?> à <?=(new DateTimeImmutable($comment['createdAt']))->format('H:i')?></h3>
+                <p><?=$comment['content'];?></p>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+</section>

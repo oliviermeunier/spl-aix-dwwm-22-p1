@@ -16,6 +16,13 @@
         </nav>
     </header>
     <main class="container-md">
+
+        <!-- Message flash -->
+        <?php if (isset($flashMessage) && $flashMessage): ?>
+            <p class="success"><?=$flashMessage;?></p>
+        <?php endif; ?>
+
+        <!-- Contenu de la page -->
         <?php include $template . '.phtml'; ?>
     </main>
 </body>

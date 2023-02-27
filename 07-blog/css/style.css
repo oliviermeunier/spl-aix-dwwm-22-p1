@@ -28,3 +28,11 @@ html, body {
     object-fit: cover;
     object-position: 50% 50%;
 }
+
+.error {
+    color: crimson;
+}
+
+.success {
+    color: green;
+}

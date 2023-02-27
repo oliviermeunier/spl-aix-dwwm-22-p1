@@ -1,5 +1,8 @@
 <?php 
 
+// Démarrage de la session
+session_start();
+
 // Inclusion de l'autoloader de composer
 require 'vendor/autoload.php';
 
@@ -19,6 +22,34 @@ if (!array_key_exists('id', $_GET) || !$_GET['id'] || !ctype_digit($_GET['id']))
 // Récupération du paramètre id de l'URL
 $idArticle = (int) $_GET['id'];
 
+$errors = [];
+
+// Traitement du formulaire d'ajout de commentaire
+if (!empty($_POST)) {
+
+    // 1. Récupération des données du formulaire
+    $nickname = $_POST['nickname'];
+    $content = $_POST['content'];
+
+    // 2. Validation des données
+    $errors = validateCommentForm($nickname, $content);
+
+    // 3. Traitements des données 
+    if(empty($errors)) {
+
+        // Insertion des données
+        addComment($nickname, $content, $idArticle);
+
+        // message flash
+        $_SESSION['flashbag'] = 'Votre commentaire a bien été ajouté';
+
+        // Redirection vers la page Article
+        header('Location: article.php?id=' . $idArticle);
+        exit;
+    }
+}
+
+
 // Récupération de l'article à afficher
 $article = getOneArticle($idArticle);
 
@@ -29,12 +60,19 @@ if (!$article) {
     exit; // Fin de l'exécution du script PHP
 }
 
+///////////////
+// AFFICHAGE //
+///////////////
 
-// Traitement du formulaire d'ajout de commentaire
+// Sélection des commentaires associés à l'article pour les afficher
+$comments = getCommentsByArticleId($idArticle);
 
+// Récupérer le message flash le cas échéant
+if (array_key_exists('flashbag', $_SESSION) && $_SESSION['flashbag']) {
 
-// Sélection des commentaires associés à l'article
-
+    $flashMessage = $_SESSION['flashbag'];
+    $_SESSION['flashbag'] = null;
+}
 
 // Affichage : inclure le template
 $template = 'article';
