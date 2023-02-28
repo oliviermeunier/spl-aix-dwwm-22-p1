@@ -10,6 +10,8 @@ require 'vendor/autoload.php';
 require 'config.php';
 
 // Inclusion des dépendances
+require 'src/Model/ArticleModel.php';
+require 'src/Model/CommentModel.php';
 require 'src/Core/Database.php';
 require 'functions.php';
 
@@ -25,6 +27,10 @@ $idArticle = (int) $_GET['id'];
 
 $errors = [];
 
+// Instanciation des classes de modèles
+$articleModel = new ArticleModel();
+$commentModel = new CommentModel();
+
 // Traitement du formulaire d'ajout de commentaire
 if (!empty($_POST)) {
 
@@ -39,7 +45,7 @@ if (!empty($_POST)) {
     if(empty($errors)) {
 
         // Insertion des données
-        addComment($nickname, $content, $idArticle);
+        $commentModel->addComment($nickname, $content, $idArticle);
 
         // message flash
         $_SESSION['flashbag'] = 'Votre commentaire a bien été ajouté';
@@ -52,7 +58,7 @@ if (!empty($_POST)) {
 
 
 // Récupération de l'article à afficher
-$article = getOneArticle($idArticle);
+$article = $articleModel->getOneArticle($idArticle);
 
 // Vérification de l'existance de l'article
 if (!$article) {
@@ -66,7 +72,7 @@ if (!$article) {
 ///////////////
 
 // Sélection des commentaires associés à l'article pour les afficher
-$comments = getCommentsByArticleId($idArticle);
+$comments = $commentModel->getCommentsByArticleId($idArticle);
 
 // Récupérer le message flash le cas échéant
 if (array_key_exists('flashbag', $_SESSION) && $_SESSION['flashbag']) {
