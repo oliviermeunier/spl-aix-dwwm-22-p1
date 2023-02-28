@@ -1,16 +1,6 @@
 <?php 
 
-class CommentModel {
-
-    private Database $db;
-
-    /**
-     * Constructeur
-     */
-    public function __construct()
-    {
-        $this->db = new Database();
-    }
+class CommentModel extends AbstractModel {
 
     function addComment(string $nickname, string $content, int $idArticle)
     {
@@ -28,6 +18,13 @@ class CommentModel {
                 WHERE articleId = ?
                 ORDER BY createdAt DESC';
 
-        return $this->db->getAllResults($sql, [$idArticle]);
+        $results = $this->db->getAllResults($sql, [$idArticle]);
+
+        $comments = [];
+        foreach ($results as $result) {
+            $comments[] = new Comment($result);
+        }
+
+        return $comments;
     }
 }

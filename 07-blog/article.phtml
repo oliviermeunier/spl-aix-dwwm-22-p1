@@ -1,12 +1,12 @@
 <!-- Le code HTML du corps de la page Article --> 
 <article class="article-details">
-    <h2><?=$article['title'];?></h2>
-    <p>Créé le <?=(new DateTimeImmutable($article['createdAt']))->format('d/m/Y');?></p>
-    <div class="badge article-category mb-3"><?=$article['name']?></div>
-    <?php if ($article['image']): ?>
-        <img src="images/<?=$article['image']?>" alt="" class="card-img-top mb-2">
+    <h2><?=$article->getTitle();?></h2>
+    <p>Créé le <?=$article->getFormattedCreatedAt();?></p>
+    <div class="badge article-category mb-3"><?=$article->getCategoryName();?></div>
+    <?php if ($article->getImage()): ?>
+        <img src="images/<?=$article->getImage();?>" alt="" class="card-img-top mb-2">
     <?php endif; ?>
-    <p class="card-text"><?=$article['content'];?></p>
+    <p class="card-text"><?=$article->getContent();?></p>
 </article>
 
 <section>
@@ -37,8 +37,8 @@
     <?php else: ?>
         <?php foreach ($comments as $comment): ?>
             <div>
-                <h3>Ajouté par <?=$comment['nickname'];?> le <?=(new DateTimeImmutable($comment['createdAt']))->format('d/m/Y')?> à <?=(new DateTimeImmutable($comment['createdAt']))->format('H:i')?></h3>
-                <p><?=$comment['content'];?></p>
+                <h3>Ajouté par <?=$comment->getNickname();?> le <?=$comment->getFormattedCreatedAt();?></h3>
+                <p><?=$comment->getContent();?></p>
             </div>
         <?php endforeach; ?>
     <?php endif; ?>

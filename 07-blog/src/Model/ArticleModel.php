@@ -1,16 +1,6 @@
 <?php 
 
-class ArticleModel {
-
-    private Database $db;
-
-    /**
-     * Constructeur
-     */
-    public function __construct()
-    {
-        $this->db = new Database();
-    }
+class ArticleModel extends AbstractModel {
 
     /**
      * Sélectionne tous les articles
@@ -24,7 +14,15 @@ class ArticleModel {
                 ORDER BY createdAt DESC 
                 LIMIT 3';
 
-        return $this->db->getAllResults($sql);
+        $results = $this->db->getAllResults($sql);
+
+        $articles = [];
+        foreach ($results as $result) {
+            $result['category'] = new Category($result['categoryId'], $result['name']);
+            $articles[] = new Article($result);
+        }
+
+        return $articles;
     } 
 
     /**
@@ -38,6 +36,9 @@ class ArticleModel {
                 ON A.categoryId = C.idCategory
                 WHERE idArticle = ?'; 
 
-        return $this->db->getOneResult($sql, [$idArticle]);
+        $result = $this->db->getOneResult($sql, [$idArticle]);
+        $result['category'] = new Category($result['categoryId'], $result['name']);
+        
+        return new Article($result);
     }
 }
