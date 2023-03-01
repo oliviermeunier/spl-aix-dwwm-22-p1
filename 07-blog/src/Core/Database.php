@@ -1,6 +1,12 @@
 <?php 
 
+// 1. Déclaration du namespace 
+namespace App\Core;
 
+// 2. Import de classes
+use PDO;
+
+// 3. Définition de la classe Database
 class Database {
 
     /**

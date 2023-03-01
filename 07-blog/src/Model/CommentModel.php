@@ -1,5 +1,10 @@
 <?php 
 
+namespace App\Model;
+
+use App\Core\AbstractModel;
+use App\Entity\Comment;
+
 class CommentModel extends AbstractModel {
 
     function addComment(string $nickname, string $content, int $idArticle)

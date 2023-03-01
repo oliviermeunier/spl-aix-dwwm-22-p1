@@ -1,5 +1,10 @@
 <?php 
 
+namespace App\Entity;
+
+use DateTimeImmutable;
+use App\Entity\Category;
+
 class Article {
 
     private int $idArticle;

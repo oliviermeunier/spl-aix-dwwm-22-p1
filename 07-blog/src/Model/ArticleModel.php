@@ -1,5 +1,11 @@
 <?php 
 
+namespace App\Model;
+
+use App\Core\AbstractModel;
+use App\Entity\Article;
+use App\Entity\Category;
+
 class ArticleModel extends AbstractModel {
 
     /**
@@ -37,6 +43,11 @@ class ArticleModel extends AbstractModel {
                 WHERE idArticle = ?'; 
 
         $result = $this->db->getOneResult($sql, [$idArticle]);
+
+        if (!$result) {
+            return null;
+        }
+
         $result['category'] = new Category($result['categoryId'], $result['name']);
         
         return new Article($result);

@@ -1,5 +1,9 @@
 <?php 
 
+namespace App\Entity;
+
+use DateTimeImmutable;
+
 class Comment {
 
     private int $idComment;

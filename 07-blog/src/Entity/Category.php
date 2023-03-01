@@ -1,5 +1,7 @@
 <?php 
 
+namespace App\Entity;
+
 class Category {
 
     private int $idCategory;
