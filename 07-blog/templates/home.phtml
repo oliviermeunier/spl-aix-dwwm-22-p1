@@ -7,13 +7,13 @@
                 <article class="card article-abstract">
                     <div class="card-body">
                         <?php if ($article->getImage()): ?>
-                            <img src="images/<?=$article->getImage()?>" alt="" class="card-img-top mb-2">
+                            <img src="<?=asset('images/' . $article->getImage())?>" alt="" class="card-img-top mb-2">
                         <?php endif; ?>
                         <h3 class="card-title"><?=$article->getTitle();?></h3>
                         <div class="badge article-category"><?=$article->getCategoryName();?></div>
                         <p>Créé le <?=$article->getFormattedCreatedAt();?></p>
                         <p class="card-text"><?=mb_substr($article->getContent(), 0, 100)?> [...]</p>
-                        <a class="btn btn-primary stretched-link" href="article.php?id=<?=$article->getIdArticle();?>">Lire la suite</a>
+                        <a class="btn btn-primary stretched-link" href="<?=constructUrl('/article', ['id' => $article->getIdArticle()]);?>">Lire la suite</a>
                     </div>
                 </article>
             </div>

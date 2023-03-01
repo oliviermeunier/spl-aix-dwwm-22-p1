@@ -4,18 +4,6 @@
 use App\Model\ArticleModel;
 use App\Model\CommentModel;
 
-// Démarrage de la session
-session_start();
-
-// Inclusion de l'autoloader de composer
-require 'vendor/autoload.php';
-
-// Inclusion de la config
-require 'config.php';
-
-// Inclusion des dépendances
-require 'functions.php';
-
 // Validation du paramètre id de l'URL
 if (!array_key_exists('id', $_GET) || !$_GET['id'] || !ctype_digit($_GET['id'])) {
     http_response_code(404);
@@ -52,7 +40,7 @@ if (!empty($_POST)) {
         $_SESSION['flashbag'] = 'Votre commentaire a bien été ajouté';
 
         // Redirection vers la page Article
-        header('Location: article.php?id=' . $idArticle);
+        header('Location: ' . constructUrl('/article', ['id' => $idArticle]));
         exit;
     }
 }
@@ -83,4 +71,4 @@ if (array_key_exists('flashbag', $_SESSION) && $_SESSION['flashbag']) {
 
 // Affichage : inclure le template
 $template = 'article';
-include 'base.phtml';
+include '../templates/base.phtml';

@@ -4,14 +4,14 @@
     <p>Créé le <?=$article->getFormattedCreatedAt();?></p>
     <div class="badge article-category mb-3"><?=$article->getCategoryName();?></div>
     <?php if ($article->getImage()): ?>
-        <img src="images/<?=$article->getImage();?>" alt="" class="card-img-top mb-2">
+        <img src="<?=asset('images/' . $article->getImage())?>" alt="" class="card-img-top mb-2">
     <?php endif; ?>
     <p class="card-text"><?=$article->getContent();?></p>
 </article>
 
 <section>
     <h2>Commentaires</h2>
-    <form action="article.php?id=<?=$idArticle?>" method="POST">
+    <form action="<?=constructUrl('/article', ['id' => $idArticle])?>" method="POST">
         <fieldset>
             <legend>Ajouter un commentaire</legend>
             <div>
