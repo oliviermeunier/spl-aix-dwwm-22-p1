@@ -17,6 +17,7 @@
                 <th>Nom du produit</th>
                 <th>Catégorie</th>
                 <th>Prix</th>
+                <th></th>
             </thead>
             <tbody>
                 <?php foreach ($products as $product): ?>
@@ -25,6 +26,20 @@
                         <td><?=$product['name']?></td>
                         <td><?=$product['category']?></td>
                         <td><?=number_format($product['price']/100, 2, ',');?> €</td>
+                        <td>
+                            <form style="display:flex;" action="addToCart.php" method="POST">
+                                <input type="hidden" name="id-product" value="<?=$product['productId']?>">
+                                <div>
+                                    <label for="quantity">Quantité</label>
+                                    <select id="quantity" name="quantity">
+                                        <?php for ($i = 1; $i <= 10; $i++): ?>
+                                            <option value="<?=$i;?>"><?=$i;?></option>
+                                        <?php endfor; ?>
+                                    </select>
+                                </div>
+                                <input type="submit" value="Ajouter au panier">
+                            </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
