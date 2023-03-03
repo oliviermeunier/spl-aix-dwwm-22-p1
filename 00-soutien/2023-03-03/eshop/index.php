@@ -1,10 +1,16 @@
 <?php 
 
+// Démarrage de la session
+session_start();
+
 // Inclusion de l'autoload de composer
 require '../vendor/autoload.php';
 
 // Inclusion de la config
 require 'config.php';
+
+// Inclusion du fichier de classe
+require 'Cart.php';
 
 // Connexion à la base de données
 $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USER, DB_PASS);
@@ -21,6 +27,9 @@ $sql = 'SELECT P.id AS productId, name, createdAt, price, label AS category
 $pdoStatement = $pdo->prepare($sql);
 $pdoStatement->execute();
 $products = $pdoStatement->fetchAll();
+
+// Récupérer le nombre de produits du panier
+$nProducts = (new Cart())->count();
 
 // Affichage
 include 'index.phtml';
