@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Eshop</h1>
+    </header>
+    <main>
+        <form action="addProduct.php" method="POST">
+            <div>
+                <label for="name">Nom du produit</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div>
+                <label for="description">Description du produit</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+            <div>
+                <label for="price">Prix du produit</label>
+                <input type="number" step=".01" name="price" id="price">
+            </div>
+            <div>
+                <label for="image">Image du produit</label>
+                <input type="text" name="image" id="image">
+            </div>
+            <div>
+                <label for="category">Catégorie</label>
+                <select name="category" id="category">
+                    <?php foreach ($categories as $category): ?>
+                        <option value="<?=$category['id']?>"><?=$category['label']?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <input type="submit" value="Enregistrer">
+        </form>
+    </main>
+</body>
+</html>
